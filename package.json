@@ -10,14 +10,15 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:vscode-codingame.helloWorld"
+        "onCommand:codinggame.compactC#"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "vscode-codingame.helloWorld",
-				"title": "Hello World"
+				"command": "codinggame.compactC#",
+				"category": "CodingGame",
+				"title": "Compact C# code"
 			}
 		]
 	},
