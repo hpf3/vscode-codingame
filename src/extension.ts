@@ -2,7 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { posix } from 'path';
-import { URI } from 'vscode-uri';
+import ignore from 'ignore';
+import path = require('path');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -15,11 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
 			for (const [name, type] of await vscode.workspace.fs.readDirectory(folder)) {
 				if (type === vscode.FileType.File) {
 					const filePath = posix.join(folder.path, name);
-					console.log(filePath);
 					paths.push(filePath);
 				} else if (type === vscode.FileType.Directory) {
-					const folderUri =  URI.parse(posix.join(folder.path, name));
-					paths.concat(await getAllFilePaths(folderUri));
+					const folderUri =  vscode.Uri.parse(posix.join(folder.path, name));
+					paths = paths.concat(await getAllFilePaths(folderUri));
 				}
 			}
 			return paths;
@@ -29,10 +29,39 @@ export function activate(context: vscode.ExtensionContext) {
 
 		if(workspaceFolderUris) {
 			var allFilePaths: string[] = [];
+			var folderToHandle!: vscode.Uri;
 
-			for (const folderUri of workspaceFolderUris) {
-				allFilePaths.concat(await getAllFilePaths(folderUri));
+			if(workspaceFolderUris.length > 1)
+			{
+				const options = <vscode.QuickPickOptions>{
+					matchOnDescription: false,
+					matchOnDetail: false,
+					placeHolder: 'Choose a workspace folder...',
+				};
+
+				const folderItems = workspaceFolderUris.map(folder => <vscode.QuickPickItem>{
+					label: folder.path,
+					description: folder.fsPath,
+					
+				  });
+				
+				var picked = await vscode.window.showQuickPick(folderItems, options);
+
+				if(picked)
+				{
+					folderToHandle = vscode.Uri.parse(picked.label);
+				}
+
+			} else {
+				folderToHandle = workspaceFolderUris[0];
 			}
+
+			allFilePaths = allFilePaths.concat((await getAllFilePaths(folderToHandle)).map(p => path.relative('/', p)));
+
+			const exclusionGlobs = ignore().add(['obj', 'bin']);
+			allFilePaths = exclusionGlobs.filter(allFilePaths);
+
+			allFilePaths = allFilePaths.filter(file => file.endsWith(".cs"));
 
 			const resultString = allFilePaths.join('\r\n');
 			const doc = await vscode.workspace.openTextDocument({ content: resultString });
