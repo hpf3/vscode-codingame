@@ -4,8 +4,9 @@
   "description": "Codingame code compactor",
   "author": "https://github.com/wvandeneede",
   "homepage": "https://github.com/wvandeneede/vscode-codingame",
+  "repository": "https://github.com/wvandeneede/vscode-codingame",
   "version": "0.0.2",
-  "publisher": "VSCodeExtensionsPublisher",
+  "publisher": "Fabrica",
   "engines": {
     "vscode": "^1.66.0"
   },
