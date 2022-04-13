@@ -58,7 +58,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 			allFilePaths = allFilePaths.concat((await getAllFilePaths(folderToHandle)).map(p => path.relative('/', p)));
 
-			const exclusionGlobs = ignore().add(['obj', 'bin']);
+			const exclusionGlobs = ignore().add(['obj', 'bin', '**/*.test']);
 			allFilePaths = exclusionGlobs.filter(allFilePaths);
 			allFilePaths = allFilePaths.filter(file => file.endsWith(".cs"));
 
