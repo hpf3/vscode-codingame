@@ -2,6 +2,8 @@
   "name": "vscode-codingame",
   "displayName": "vscode-codingame",
   "description": "Codingame code compactor",
+  "author": "https://github.com/wvandeneede",
+  "homepage": "https://github.com/wvandeneede/vscode-codingame",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.66.0"
