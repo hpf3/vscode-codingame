@@ -7,7 +7,7 @@ Inspired by: https://github.com/TomKirby/CGCompactor
 ## Features
 
 At the moment this extension will only compact C# projects.
-Any project with a name ending on '.test' will be diregarded.
+Any project with a name ending on '.test' will be disregarded.
 
 
 ## Extension Settings
