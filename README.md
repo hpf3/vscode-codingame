@@ -19,7 +19,7 @@ The extension doesn't use any settings.
 
 ## Release Notes
 
-### 0.0.1
+### 0.0.2
 
 Initial release of vscode-codingame
 
