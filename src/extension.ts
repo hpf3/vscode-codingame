@@ -60,10 +60,18 @@ export function activate(context: vscode.ExtensionContext) {
 
 			const exclusionGlobs = ignore().add(['obj', 'bin']);
 			allFilePaths = exclusionGlobs.filter(allFilePaths);
-
 			allFilePaths = allFilePaths.filter(file => file.endsWith(".cs"));
 
-			const resultString = allFilePaths.join('\r\n');
+			var allCodeLines: string[] = [];
+
+			for(const fileUri of allFilePaths) {
+				const readData = await vscode.workspace.fs.readFile(vscode.Uri.parse(fileUri));
+				const readStr = Buffer.from(readData).toString('utf8');
+
+				allCodeLines = allCodeLines.concat(readStr.replace(/\r\n/g,'\n').split('\n'));
+			}
+
+			const resultString = allCodeLines.join('\r\n');
 			const doc = await vscode.workspace.openTextDocument({ content: resultString });
 			vscode.window.showTextDocument(doc, { viewColumn: vscode.ViewColumn.Beside });
 		}
