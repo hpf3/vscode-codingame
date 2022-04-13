@@ -5,6 +5,7 @@
   "author": "https://github.com/wvandeneede",
   "homepage": "https://github.com/wvandeneede/vscode-codingame",
   "version": "0.0.1",
+  "publisher": "VSCodeExtensionsPublisher",
   "engines": {
     "vscode": "^1.66.0"
   },
