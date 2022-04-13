@@ -71,6 +71,7 @@ export function activate(context: vscode.ExtensionContext) {
 				allCodeLines = allCodeLines.concat(readStr.replace(/\r\n/g,'\n').split('\n'));
 			}
 
+			//testing commits
 			const resultString = allCodeLines.join('\r\n');
 			const doc = await vscode.workspace.openTextDocument({ content: resultString });
 			vscode.window.showTextDocument(doc, { viewColumn: vscode.ViewColumn.Beside });
