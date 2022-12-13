@@ -55,6 +55,6 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
-    "ignore": "^5.2.0"
+    "ignore": "^5.2.1"
   }
 }
