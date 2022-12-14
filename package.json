@@ -5,7 +5,7 @@
   "author": "https://github.com/wvandeneede",
   "homepage": "https://github.com/wvandeneede/vscode-codingame",
   "repository": "https://github.com/wvandeneede/vscode-codingame",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "publisher": "Fabrica",
   "engines": {
     "vscode": "^1.66.0"
